@@ -1,0 +1,66 @@
+<div ng-controller="ordersController">
+            <h2><u>Add a New Order</u></h2>
+                <form class='form'>
+                    <label>Customer:</label>
+                                     <!-- color.name for color in colors -->
+
+
+                    <select class='form-control' ng-model='newOrder.customer_name' required >
+                        <option value='{{customer.name}}' ng-repeat='customer in customers'>{{customer.name}}</option>
+                    </select><br>
+                    <label>Order:</label>
+                    <select class='form-control' ng-model='newOrder.quantity' required >
+                    	<option value='1'>1</option>
+                    	<option value='2'>2</option>
+                    	<option value='3'>3</option>
+                    	<option value='4'>4</option>
+                    	<option value='5'>5</option>
+                    	<option value='6'>6</option>
+                    	<option value='7'>7</option>
+                    	<option value='8'>8</option>
+                    	<option value='9'>9</option>
+                    	<option value='10'>10</option>
+                    </select><br>
+                    <label>Product:</label>
+                    <select class='form-control' ng-model='newOrder.product' required >
+                    	<option value='Nike Shoes'>Nike Shoes</option>
+                    	<option value='Black Belts'>Black Belts</option>
+                    	<option value='Ice Cream'>Ice Cream</option>
+                    	<option value='Candies'>Candies</option>
+                    </select><br>
+                    <a href='/#/orders' class='btn btn-primary pull-right' ng-click='addOrder()'>Add</a>
+                    <!-- <button type='submit' class='btn btn-primary pull-right' ng-click='addOrder()'>Add</button> -->
+                </form>
+                
+
+            </br></br><b>Search orders:</b><input type="text" ng-model="filter_name" class="form-control" placeholder='Filter'></br></br>
+            <table class='table table-striped table-bordered' style='border:1px solid silver;'>
+                <thead>
+                    <tr>
+                        <td><b>Customer Name</b></td>
+                        <td><b>Product</b></td>
+                        <td><b>Quantity</b></td>
+                        <td><b>Date</b></td>
+                        <td><b>Action</b></td>
+                    </tr>
+                </thead>
+                <tr ng-repeat="order in orders | filter:filter_name | orderBy:'-order_date'">
+                    <td>
+                        <span ng-bind='order.customer_name'></span>
+                    </td>
+                    <td>
+                        <span ng-bind="order.product"></span>
+                    </td>
+                    <td>
+                        <span ng-bind='order.quantity'></span>
+                    </td>
+                    <td>
+                        <span ng-bind="order.order_date | date:'MMMM d yyyy'"></span>
+                    </td>
+                    <td>
+                        <a href='{{order._id}}/delete_order' class="btn btn-xs btn-danger">Delete</a>
+                        <!-- <button ng-click='removeOrder(order._id)' class='btn btn-danger'>Remove</button> -->
+                    </td>
+                </tr>
+            </table>
+</div>
